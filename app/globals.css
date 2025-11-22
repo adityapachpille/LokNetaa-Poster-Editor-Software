@@ -13,6 +13,20 @@ html, body {
   text-align: center;
 }
 
+/* Top bar wrapper */
+.topBarWrapper {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+/* Top bar */
 .topBar {
   display: flex;
   flex-wrap: wrap;
@@ -21,21 +35,22 @@ html, body {
   margin-bottom: 20px;
 }
 
+/* Buttons */
 .button {
   padding: 10px 14px;
-  background: #f47734;
-  color: rgb(0, 0, 0);
+  background: #f47734; /* orange theme */
+  color: #000;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   transition: background 0.2s ease;
 }
 
 .button:hover {
   background: #760e03;
-  color: rgb(255, 255, 255);
+  color: #fff;
 }
 
 .button:disabled {
@@ -43,6 +58,7 @@ html, body {
   cursor: not-allowed;
 }
 
+/* Canvas wrapper */
 .canvasWrapper {
   position: relative;
   width: 100%;
@@ -57,10 +73,11 @@ canvas {
   border: 2px solid #ccc;
   border-radius: 8px;
   background: white;
-  touch-action: none;
+  touch-action: none; /* ✅ important for mobile drag */
   display: block;
 }
 
+/* Upload patch */
 .uploadPatch {
   position: absolute;
   top: 50%;
@@ -90,23 +107,23 @@ canvas {
   font-size: 15px;
 }
 
+/* Footer */
 .footer {
-  background: #f3f4f6; /* light gray */
-  color: #374151;      /* gray-700 */
-  padding: 16px;       /* py-4 px-4 */
-  font-size: 20px;
-    font-weight: 600;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .footerInner {
-  max-width: 1152px;   /* ~max-w-6xl */
+  max-width: 1152px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
-  font-size: 14px;     /* text-sm */
 }
 
 .footerText {
@@ -115,11 +132,11 @@ canvas {
 
 .footerLinks {
   display: flex;
-  gap: 16px;           /* space-x-4 */
+  gap: 16px;
 }
 
 .footerLink {
-  color: #1f2937;      /* gray-800 */
+  color: #1f2937;
   text-decoration: none;
 }
 
@@ -127,82 +144,20 @@ canvas {
   text-decoration: underline;
 }
 
-/* Responsive: switch to row on >=640px */
+/* Responsive */
 @media (min-width: 640px) {
   .footerInner {
     flex-direction: row;
   }
-  .footerText {
-    margin-bottom: 0;
-  }
 }
-
 
 @media (max-width: 480px) {
   .container {
     padding: 12px;
   }
 
-  .button {
-    flex: 1 1 100%;
-    text-align: center;
-  }
-
   .topBar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .uploadPatch {
-    font-size: 14px;
-    padding: 16px;
-  }
-
-  .topBarWrapper {
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #000000;
-}
-
-.topBar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-}
-
-.button {
-  padding: 10px 16px;
-  background: #1f2937;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.button:hover {
-  background: #374151;
-}
-
-.button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@media (max-width: 480px) {
-  .topBar {
-    flex-direction: row;
+    flex-direction: row;       /* ✅ keep buttons in one row */
     flex-wrap: nowrap;
     overflow-x: auto;
     justify-content: flex-start;
@@ -213,6 +168,9 @@ canvas {
     font-size: 14px;
     white-space: nowrap;
   }
-}
 
+  .uploadPatch {
+    font-size: 14px;
+    padding: 16px;
+  }
 }
