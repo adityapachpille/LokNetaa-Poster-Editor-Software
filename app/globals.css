@@ -1,0 +1,218 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #000000;
+  background: #f3f4f6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 10px 14px;
+  background: #f47734;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.button:hover {
+  background: #760e03;
+  color: rgb(255, 255, 255);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.canvasWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  touch-action: none;
+  display: block;
+}
+
+.uploadPatch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 150px;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  z-index: 10;
+}
+
+.uploadPatch:hover {
+  background: #f3f4f6;
+}
+
+.uploadPatch p {
+  margin: 0;
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.footer {
+  background: #f3f4f6; /* light gray */
+  color: #374151;      /* gray-700 */
+  padding: 16px;       /* py-4 px-4 */
+  font-size: 20px;
+    font-weight: 600;
+}
+
+.footerInner {
+  max-width: 1152px;   /* ~max-w-6xl */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;     /* text-sm */
+}
+
+.footerText {
+  margin: 0;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 16px;           /* space-x-4 */
+}
+
+.footerLink {
+  color: #1f2937;      /* gray-800 */
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: switch to row on >=640px */
+@media (min-width: 640px) {
+  .footerInner {
+    flex-direction: row;
+  }
+  .footerText {
+    margin-bottom: 0;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .button {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .uploadPatch {
+    font-size: 14px;
+    padding: 16px;
+  }
+
+  .topBarWrapper {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #000000;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.button {
+  padding: 10px 16px;
+  background: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button:hover {
+  background: #374151;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .topBar {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .button {
+    flex: 0 0 auto;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
+
+}
