@@ -9,12 +9,13 @@ export default function CanvasEditor() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const canvasSize = 600;
-  const imageSize = 150;
+  const imageWidth = 150;   // width stays same
+  const imageHeight = 170;  // ✅ slightly taller than width
 
   // ✅ Start image at left side (same as patch)
   const [position, setPosition] = useState({
     x: 50, // left side
-    y: canvasSize / 2 - imageSize / 2, // vertical center
+    y: canvasSize / 2 - imageHeight / 2, // vertical center
   });
 
   const handleUpload = (e) => {
@@ -54,11 +55,10 @@ export default function CanvasEditor() {
 
       if (image) {
         ctx.save();
-        // ✅ Rounded rectangle mask instead of circle
-        const borderRadius = 20; // adjust this value for more/less curve
-        drawRoundedRect(ctx, position.x, position.y, imageSize, imageSize, borderRadius);
+        const borderRadius = 20; // adjust curve
+        drawRoundedRect(ctx, position.x, position.y, imageWidth, imageHeight, borderRadius);
         ctx.clip();
-        ctx.drawImage(image, position.x, position.y, imageSize, imageSize);
+        ctx.drawImage(image, position.x, position.y, imageWidth, imageHeight);
         ctx.restore();
       }
     };
@@ -76,9 +76,9 @@ export default function CanvasEditor() {
     const y = e.clientY - rect.top;
     if (
       x > position.x &&
-      x < position.x + imageSize &&
+      x < position.x + imageWidth &&
       y > position.y &&
-      y < position.y + imageSize
+      y < position.y + imageHeight
     ) {
       setDragging(true);
       setOffset({ x: x - position.x, y: y - position.y });
