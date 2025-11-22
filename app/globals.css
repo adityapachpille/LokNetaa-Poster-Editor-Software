@@ -167,22 +167,4 @@ canvas {
     flex-direction: row;       /* ✅ keep buttons in one row */
     flex-wrap: nowrap;
     overflow-x: auto;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch; /* ✅ smooth scroll on iOS */
-  }
-
-  .button {
-    flex: 0 0 auto;
-    font-size: 14px;
-    white-space: nowrap;
-  }
-
-  .uploadPatch {
-    font-size: 14px;
-    padding: 16px;
-  }
-
-  .footerInner {
-    text-align: center; /* ✅ center footer on mobile */
-  }
-}
+    justify
