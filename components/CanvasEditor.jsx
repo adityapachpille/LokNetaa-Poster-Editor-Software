@@ -126,7 +126,7 @@ const [position, setPosition] = useState({
     <>
       {/* Top bar */}
       <div className="topBarWrapper">
-        <h2 className="title">📲🗳️ LokNetaa Poster Editor Softwarie 👥📸✨</h2>
+        <h2 className="title">📲🗳️ LokNetaa Poster Editor Softwarieb 👥📸✨</h2>
         <div className="topBar">
           <button className="button" onClick={() => fileRef.current?.click()}>
             📤 Import Photo
