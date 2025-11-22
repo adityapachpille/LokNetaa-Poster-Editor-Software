@@ -109,8 +109,8 @@ export default function CanvasEditor() {
   const handleShare = async () => {
     try {
       await navigator.share({
-        title: "Election Compare",
-        text: "Check out my campaign poster!",
+        title: "मी मतदार",
+        text: "माझा नगराध्यक्ष डॉ. दिलीप रामकृष्ण रत्नपारखी",
         url: window.location.href,
       });
     } catch {
