@@ -144,14 +144,15 @@ export default function CanvasEditor() {
           </div>
         )}
         <canvas
-          ref={canvasRef}
-          width={canvasSize}
-          height={canvasSize}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          style={{ touchAction: "none" }} // ✅ disables default touch gestures
-        />
+  ref={canvasRef}
+  width={canvasSize}
+  height={canvasSize}
+  onPointerDown={handlePointerDown}
+  onPointerMove={handlePointerMove}
+  onPointerUp={handlePointerUp}
+  style={{ touchAction: "none" }} // ✅ disables default touch gestures
+/>
+
       </div>
     </>
   );
