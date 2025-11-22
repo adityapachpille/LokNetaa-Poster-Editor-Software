@@ -17,6 +17,11 @@ html, body {
 .topBarWrapper {
   margin-bottom: 24px;
   text-align: center;
+  position: sticky;   /* ✅ keep top bar visible */
+  top: 0;
+  background: #f3f4f6;
+  z-index: 50;
+  padding: 10px 0;
 }
 
 .title {
@@ -75,6 +80,7 @@ canvas {
   background: white;
   touch-action: none; /* ✅ important for mobile drag */
   display: block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* ✅ subtle shadow */
 }
 
 /* Upload patch */
@@ -94,6 +100,7 @@ canvas {
   font-size: 16px;
   text-align: center;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* ✅ subtle shadow */
 }
 
 .uploadPatch:hover {
@@ -161,6 +168,7 @@ canvas {
     flex-wrap: nowrap;
     overflow-x: auto;
     justify-content: flex-start;
+    -webkit-overflow-scrolling: touch; /* ✅ smooth scroll on iOS */
   }
 
   .button {
@@ -172,5 +180,9 @@ canvas {
   .uploadPatch {
     font-size: 14px;
     padding: 16px;
+  }
+
+  .footerInner {
+    text-align: center; /* ✅ center footer on mobile */
   }
 }
