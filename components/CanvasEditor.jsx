@@ -55,7 +55,7 @@ export default function CanvasEditor() {
     drawCanvas();
   }, [image, position]);
 
-  // Unified pointer events (works for mouse + touch)
+  // ✅ Unified pointer events
   const handlePointerDown = (e) => {
     if (!image) return;
     const rect = canvasRef.current.getBoundingClientRect();
@@ -74,7 +74,7 @@ export default function CanvasEditor() {
 
   const handlePointerMove = (e) => {
     if (!dragging) return;
-    e.preventDefault(); // stop scroll/zoom
+    e.preventDefault(); // ✅ stop scroll
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -105,6 +105,22 @@ export default function CanvasEditor() {
       await navigator.clipboard.writeText(window.location.href);
     }
   };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // ✅ Native listener with passive:false for mobile
+    const moveHandler = (e) => {
+      if (!dragging) return;
+      e.preventDefault();
+    };
+
+    canvas.addEventListener("touchmove", moveHandler, { passive: false });
+    return () => {
+      canvas.removeEventListener("touchmove", moveHandler);
+    };
+  }, [dragging]);
 
   return (
     <>
@@ -144,15 +160,14 @@ export default function CanvasEditor() {
           </div>
         )}
         <canvas
-  ref={canvasRef}
-  width={canvasSize}
-  height={canvasSize}
-  onPointerDown={handlePointerDown}
-  onPointerMove={handlePointerMove}
-  onPointerUp={handlePointerUp}
-  style={{ touchAction: "none" }} // ✅ disables default touch gestures
-/>
-
+          ref={canvasRef}
+          width={canvasSize}
+          height={canvasSize}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          style={{ touchAction: "none" }} // ✅ disables default gestures
+        />
       </div>
     </>
   );
