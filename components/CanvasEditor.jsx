@@ -30,7 +30,7 @@ export default function CanvasEditor() {
     ctx.fillRect(0, 0, canvasSize, canvasSize);
 
     const candidate = new Image();
-    candidate.src = "/candidate.jpg";
+    candidate.src = "/candidate.jpeg";
     candidate.onload = () => {
       ctx.drawImage(candidate, 0, 0, canvasSize, canvasSize);
 
@@ -74,7 +74,7 @@ export default function CanvasEditor() {
 
   const handlePointerMove = (e) => {
     if (!dragging) return;
-    e.preventDefault(); // ✅ stop scroll
+    e.preventDefault(); // ✅ stop scroll/zoom
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -105,22 +105,6 @@ export default function CanvasEditor() {
       await navigator.clipboard.writeText(window.location.href);
     }
   };
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    // ✅ Native listener with passive:false for mobile
-    const moveHandler = (e) => {
-      if (!dragging) return;
-      e.preventDefault();
-    };
-
-    canvas.addEventListener("touchmove", moveHandler, { passive: false });
-    return () => {
-      canvas.removeEventListener("touchmove", moveHandler);
-    };
-  }, [dragging]);
 
   return (
     <>
