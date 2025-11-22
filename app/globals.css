@@ -92,11 +92,10 @@ canvas.dragging {
 /* Upload patch */
 .uploadPatch {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 150px;
+  top: 50%;                /* vertically centered */
+  left: 50px;              /* ✅ anchored to left side */
+  transform: translateY(-50%); /* only vertical centering */
+  width: 130px;
   padding: 20px;
   border: 2px dashed #ccc;
   border-radius: 20px;
@@ -136,4 +135,61 @@ canvas.dragging {
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  justify-content: space-between;
+}
+
+.footerText {
+  margin: 0;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.footerLink {
+  color: #1f2937;
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (min-width: 640px) {
+  .footerInner {
+    flex-direction: row;
   }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .topBar {
+    flex-direction: row;       /* ✅ keep buttons in one row */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch; /* ✅ smooth scroll on iOS */
+  }
+
+  .button {
+    flex: 0 0 auto;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .uploadPatch {
+    font-size: 14px;
+    padding: 16px;
+    left: 40px; /* ✅ slightly tighter on mobile */
+    width:70px;
+  }
+
+  .footerInner {
+    text-align: center; /* ✅ center footer on mobile */
+  }
+}
