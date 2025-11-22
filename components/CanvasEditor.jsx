@@ -55,6 +55,7 @@ export default function CanvasEditor() {
     drawCanvas();
   }, [image, position]);
 
+  // Desktop drag
   const handleMouseDown = (e) => {
     if (!image) return;
     const rect = canvasRef.current.getBoundingClientRect();
@@ -83,6 +84,37 @@ export default function CanvasEditor() {
     setDragging(false);
   };
 
+  // Mobile drag
+  const handleTouchStart = (e) => {
+    if (!image) return;
+    const touch = e.touches[0];
+    const rect = canvasRef.current.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    if (
+      x > position.x &&
+      x < position.x + imageSize &&
+      y > position.y &&
+      y < position.y + imageSize
+    ) {
+      setDragging(true);
+      setOffset({ x: x - position.x, y: y - position.y });
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (!dragging) return;
+    const touch = e.touches[0];
+    const rect = canvasRef.current.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    setPosition({ x: x - offset.x, y: y - offset.y });
+  };
+
+  const handleTouchEnd = () => {
+    setDragging(false);
+  };
+
   const handleDownload = () => {
     const canvas = canvasRef.current;
     const link = document.createElement("a");
@@ -108,19 +140,19 @@ export default function CanvasEditor() {
     <>
       {/* Top bar */}
       <div className="topBarWrapper">
-  <h2 className="title">📲🗳️ LokNetaa Poster Editor Software 👥📸✨</h2>
-  <div className="topBar">
-    <button className="button" onClick={() => fileRef.current?.click()}>
-      📤 Import Photo
-    </button>
-    <button className="button" onClick={handleDownload} disabled={!image}>
-      📥 Download
-    </button>
-    <button className="button" onClick={handleShare}>
-      🔗 Share
-    </button>
-  </div>
-</div>
+        <h2 className="title">📲🗳️ LokNetaa Poster Editor Software 👥📸✨</h2>
+        <div className="topBar">
+          <button className="button" onClick={() => fileRef.current?.click()}>
+            📤 Import Photo
+          </button>
+          <button className="button" onClick={handleDownload} disabled={!image}>
+            📥 Download
+          </button>
+          <button className="button" onClick={handleShare}>
+            🔗 Share
+          </button>
+        </div>
+      </div>
 
       {/* Canvas with upload patch */}
       <div className="canvasWrapper pt-10">
@@ -148,6 +180,9 @@ export default function CanvasEditor() {
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         />
       </div>
     </>
