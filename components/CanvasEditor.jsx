@@ -9,7 +9,7 @@ export default function CanvasEditor() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const canvasSize = 600;
-  const imageSize = 160;
+  const imageSize = 150;
 
   // ✅ Start image at left side (same as patch)
   const [position, setPosition] = useState({
