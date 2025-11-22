@@ -9,17 +9,16 @@ export default function CanvasEditor() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const canvasSize = 600;
-// ⬆️ Increased size on all sides
-const imageWidth = 170;   // was 150
-const imageHeight = 190;  // was 170
+  const [imageWidth, setImageWidth] = useState(170);   // ✅ adjustable width
+  const [imageHeight, setImageHeight] = useState(190); // ✅ adjustable height
+  const [scale, setScale] = useState(1);               // ✅ zoom factor
+  const [filter, setFilter] = useState("none");        // ✅ filter state
 
-  // ✅ Start image at left side (same as patch)
   // ✅ Start image a bit right and down
-const [position, setPosition] = useState({
-  x: 56, // moved right (was 50)
-  y: canvasSize / 2 - imageHeight / 2 + 20, // moved down by 20px
-});
-
+  const [position, setPosition] = useState({
+    x: 80,
+    y: canvasSize / 2 - imageHeight / 2 + 20,
+  });
 
   const handleUpload = (e) => {
     const file = e.dataTransfer?.files?.[0] || e.target.files?.[0];
@@ -58,10 +57,13 @@ const [position, setPosition] = useState({
 
       if (image) {
         ctx.save();
-        const borderRadius = 20; // adjust curve
-        drawRoundedRect(ctx, position.x, position.y, imageWidth, imageHeight, borderRadius);
+        ctx.filter = filter; // ✅ apply filter
+        const borderRadius = 20;
+        const w = imageWidth * scale;
+        const h = imageHeight * scale;
+        drawRoundedRect(ctx, position.x, position.y, w, h, borderRadius);
         ctx.clip();
-        ctx.drawImage(image, position.x, position.y, imageWidth, imageHeight);
+        ctx.drawImage(image, position.x, position.y, w, h);
         ctx.restore();
       }
     };
@@ -69,7 +71,7 @@ const [position, setPosition] = useState({
 
   useEffect(() => {
     drawCanvas();
-  }, [image, position]);
+  }, [image, position, scale, filter, imageWidth, imageHeight]);
 
   // Pointer events
   const handlePointerDown = (e) => {
@@ -79,9 +81,9 @@ const [position, setPosition] = useState({
     const y = e.clientY - rect.top;
     if (
       x > position.x &&
-      x < position.x + imageWidth &&
+      x < position.x + imageWidth * scale &&
       y > position.y &&
-      y < position.y + imageHeight
+      y < position.y + imageHeight * scale
     ) {
       setDragging(true);
       setOffset({ x: x - position.x, y: y - position.y });
@@ -137,6 +139,27 @@ const [position, setPosition] = useState({
           <button className="button" onClick={handleShare}>
             🔗 Share
           </button>
+          {image && (
+            <>
+              <button className="button" onClick={() => setScale(scale + 0.1)}>
+                ➕ Zoom In
+              </button>
+              <button className="button" onClick={() => setScale(Math.max(scale - 0.1, 0.5))}>
+                ➖ Zoom Out
+              </button>
+              <select
+                className="button"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <option value="none">No Filter</option>
+                <option value="grayscale(100%)">Grayscale</option>
+                <option value="sepia(100%)">Sepia</option>
+                <option value="brightness(120%)">Bright</option>
+                <option value="contrast(150%)">High Contrast</option>
+              </select>
+            </>
+          )}
         </div>
       </div>
 
