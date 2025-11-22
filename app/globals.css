@@ -81,6 +81,12 @@ canvas {
   touch-action: none; /* ✅ important for mobile drag */
   display: block;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* ✅ subtle shadow */
+  user-select: none; /* ✅ prevent text highlight */
+  cursor: grab;
+}
+
+canvas.dragging {
+  cursor: grabbing;
 }
 
 /* Upload patch */
@@ -130,41 +136,3 @@ canvas {
   flex-direction: column;
   gap: 8px;
   align-items: center;
-  justify-content: space-between;
-}
-
-.footerText {
-  margin: 0;
-}
-
-.footerLinks {
-  display: flex;
-  gap: 16px;
-}
-
-.footerLink {
-  color: #1f2937;
-  text-decoration: none;
-}
-
-.footerLink:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (min-width: 640px) {
-  .footerInner {
-    flex-direction: row;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 12px;
-  }
-
-  .topBar {
-    flex-direction: row;       /* ✅ keep buttons in one row */
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify
