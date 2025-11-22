@@ -13,10 +13,12 @@ export default function CanvasEditor() {
   const imageHeight = 170;  // ✅ slightly taller than width
 
   // ✅ Start image at left side (same as patch)
-  const [position, setPosition] = useState({
-    x: 50, // left side
-    y: canvasSize / 2 - imageHeight / 2, // vertical center
-  });
+  // ✅ Start image a bit right and down
+const [position, setPosition] = useState({
+  x: 80, // moved right (was 50)
+  y: canvasSize / 2 - imageHeight / 2 + 20, // moved down by 20px
+});
+
 
   const handleUpload = (e) => {
     const file = e.dataTransfer?.files?.[0] || e.target.files?.[0];
