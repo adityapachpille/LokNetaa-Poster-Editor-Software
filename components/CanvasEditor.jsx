@@ -30,7 +30,7 @@ export default function CanvasEditor() {
     ctx.fillRect(0, 0, canvasSize, canvasSize);
 
     const candidate = new Image();
-    candidate.src = "/candidate.jpg";
+    candidate.src = "/candidate.jpeg";
     candidate.onload = () => {
       ctx.drawImage(candidate, 0, 0, canvasSize, canvasSize);
 
@@ -55,7 +55,7 @@ export default function CanvasEditor() {
     drawCanvas();
   }, [image, position]);
 
-  // ✅ Unified pointer events
+  // Unified pointer events (desktop + mobile)
   const handlePointerDown = (e) => {
     if (!image) return;
     const rect = canvasRef.current.getBoundingClientRect();
@@ -74,7 +74,7 @@ export default function CanvasEditor() {
 
   const handlePointerMove = (e) => {
     if (!dragging) return;
-    e.preventDefault(); // ✅ stop scroll/zoom
+    e.preventDefault();
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -150,7 +150,7 @@ export default function CanvasEditor() {
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          style={{ touchAction: "none" }} // ✅ disables default gestures
+          style={{ touchAction: "none" }}
         />
       </div>
     </>
