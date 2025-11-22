@@ -104,6 +104,7 @@ export default function CanvasEditor() {
 
   const handleTouchMove = (e) => {
     if (!dragging) return;
+    e.preventDefault(); // ✅ Prevent page scroll
     const touch = e.touches[0];
     const rect = canvasRef.current.getBoundingClientRect();
     const x = touch.clientX - rect.left;
@@ -183,6 +184,7 @@ export default function CanvasEditor() {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          style={{ touchAction: "none" }} // ✅ Prevent default gestures
         />
       </div>
     </>
