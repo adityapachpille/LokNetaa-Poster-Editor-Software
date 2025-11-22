@@ -16,8 +16,8 @@ const imageHeight = 190;  // was 170
   // ✅ Start image at left side (same as patch)
   // ✅ Start image a bit right and down
 const [position, setPosition] = useState({
-  x: 57, // moved right (was 50)
-  y: canvasSize / 2 - imageHeight / 2 + 10, // moved down by 20px
+  x: 56, // moved right (was 50)
+  y: canvasSize / 2 - imageHeight / 2 + 20, // moved down by 20px
 });
 
 
@@ -126,7 +126,7 @@ const [position, setPosition] = useState({
     <>
       {/* Top bar */}
       <div className="topBarWrapper">
-        <h2 className="title">📲🗳️ LokNetaa Poster Editor Softwarieb 👥📸✨</h2>
+        <h2 className="title">📲🗳️ LokNetaa Poster Editor Softwariemb 👥📸✨</h2>
         <div className="topBar">
           <button className="button" onClick={() => fileRef.current?.click()}>
             📤 Import Photo
