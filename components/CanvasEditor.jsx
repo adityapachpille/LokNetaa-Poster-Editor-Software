@@ -55,8 +55,8 @@ export default function CanvasEditor() {
     drawCanvas();
   }, [image, position]);
 
-  // Desktop drag
-  const handleMouseDown = (e) => {
+  // Unified pointer events (works for mouse + touch)
+  const handlePointerDown = (e) => {
     if (!image) return;
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -72,47 +72,16 @@ export default function CanvasEditor() {
     }
   };
 
-  const handleMouseMove = (e) => {
+  const handlePointerMove = (e) => {
     if (!dragging) return;
+    e.preventDefault(); // stop scroll/zoom
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setPosition({ x: x - offset.x, y: y - offset.y });
   };
 
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
-
-  // Mobile drag
-  const handleTouchStart = (e) => {
-    if (!image) return;
-    const touch = e.touches[0];
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    if (
-      x > position.x &&
-      x < position.x + imageSize &&
-      y > position.y &&
-      y < position.y + imageSize
-    ) {
-      setDragging(true);
-      setOffset({ x: x - position.x, y: y - position.y });
-    }
-  };
-
-  const handleTouchMove = (e) => {
-    if (!dragging) return;
-    e.preventDefault(); // ✅ Prevent page scroll
-    const touch = e.touches[0];
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    setPosition({ x: x - offset.x, y: y - offset.y });
-  };
-
-  const handleTouchEnd = () => {
+  const handlePointerUp = () => {
     setDragging(false);
   };
 
@@ -141,7 +110,7 @@ export default function CanvasEditor() {
     <>
       {/* Top bar */}
       <div className="topBarWrapper">
-        <h2 className="title">📲🗳️ LokNetaa Poster Editor Softwaree 👥📸✨</h2>
+        <h2 className="title">📲🗳️ LokNetaa Poster Editor Software 👥📸✨</h2>
         <div className="topBar">
           <button className="button" onClick={() => fileRef.current?.click()}>
             📤 Import Photo
@@ -178,13 +147,10 @@ export default function CanvasEditor() {
           ref={canvasRef}
           width={canvasSize}
           height={canvasSize}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          style={{ touchAction: "none" }} // ✅ Prevent default gestures
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          style={{ touchAction: "none" }} // ✅ disables default touch gestures
         />
       </div>
     </>
