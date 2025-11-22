@@ -9,12 +9,10 @@ export default function CanvasEditor() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const canvasSize = 600;
-  const [imageWidth, setImageWidth] = useState(170);   // ✅ adjustable width
-  const [imageHeight, setImageHeight] = useState(190); // ✅ adjustable height
-  const [scale, setScale] = useState(1);               // ✅ zoom factor
-  const [filter, setFilter] = useState("none");        // ✅ filter state
+  const [imageWidth, setImageWidth] = useState(170);
+  const [imageHeight, setImageHeight] = useState(190);
+  const [scale, setScale] = useState(1);
 
-  // ✅ Start image a bit right and down
   const [position, setPosition] = useState({
     x: 80,
     y: canvasSize / 2 - imageHeight / 2 + 20,
@@ -57,7 +55,6 @@ export default function CanvasEditor() {
 
       if (image) {
         ctx.save();
-        ctx.filter = filter; // ✅ apply filter
         const borderRadius = 20;
         const w = imageWidth * scale;
         const h = imageHeight * scale;
@@ -71,9 +68,8 @@ export default function CanvasEditor() {
 
   useEffect(() => {
     drawCanvas();
-  }, [image, position, scale, filter, imageWidth, imageHeight]);
+  }, [image, position, scale, imageWidth, imageHeight]);
 
-  // Pointer events
   const handlePointerDown = (e) => {
     if (!image) return;
     const rect = canvasRef.current.getBoundingClientRect();
@@ -147,17 +143,6 @@ export default function CanvasEditor() {
               <button className="button" onClick={() => setScale(Math.max(scale - 0.1, 0.5))}>
                 ➖ Zoom Out
               </button>
-              <select
-                className="button"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-              >
-                <option value="none">No Filter</option>
-                <option value="grayscale(100%)">Grayscale</option>
-                <option value="sepia(100%)">Sepia</option>
-                <option value="brightness(120%)">Bright</option>
-                <option value="contrast(150%)">High Contrast</option>
-              </select>
             </>
           )}
         </div>
