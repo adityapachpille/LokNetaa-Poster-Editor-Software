@@ -16,7 +16,7 @@ export default function CanvasEditor() {
   // ✅ Start image a bit right and down
 const [position, setPosition] = useState({
   x: 80, // moved right (was 50)
-  y: canvasSize / 2 - imageHeight / 2 + 20, // moved down by 20px
+  y: canvasSize / 2 - imageHeight / 2 + 10, // moved down by 20px
 });
 
 
