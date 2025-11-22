@@ -9,8 +9,9 @@ export default function CanvasEditor() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const canvasSize = 600;
-  const imageWidth = 150;   // width stays same
-  const imageHeight = 170;  // ✅ slightly taller than width
+// ⬆️ Increased size on all sides
+const imageWidth = 170;   // was 150
+const imageHeight = 190;  // was 170
 
   // ✅ Start image at left side (same as patch)
   // ✅ Start image a bit right and down
