@@ -30,7 +30,7 @@ export default function CanvasEditor() {
     ctx.fillRect(0, 0, canvasSize, canvasSize);
 
     const candidate = new Image();
-    candidate.src = "/candidate.jpeg";
+    candidate.src = "/candidate.jpg";
     candidate.onload = () => {
       ctx.drawImage(candidate, 0, 0, canvasSize, canvasSize);
 
