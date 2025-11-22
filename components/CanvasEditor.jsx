@@ -16,7 +16,7 @@ const imageHeight = 190;  // was 170
   // ✅ Start image at left side (same as patch)
   // ✅ Start image a bit right and down
 const [position, setPosition] = useState({
-  x: 60, // moved right (was 50)
+  x: 57, // moved right (was 50)
   y: canvasSize / 2 - imageHeight / 2 + 10, // moved down by 20px
 });
 
