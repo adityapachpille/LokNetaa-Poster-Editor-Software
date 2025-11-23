@@ -135,16 +135,6 @@ export default function CanvasEditor() {
           <button className="button" onClick={handleShare}>
             🔗 Share
           </button>
-          {image && (
-            <>
-              <button className="button" onClick={() => setScale(scale + 0.1)}>
-                ➕ Zoom In
-              </button>
-              <button className="button" onClick={() => setScale(Math.max(scale - 0.1, 0.5))}>
-                ➖ Zoom Out
-              </button>
-            </>
-          )}
         </div>
       </div>
 
